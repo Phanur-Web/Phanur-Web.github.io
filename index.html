@@ -1,0 +1,621 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        /* 颜色变量定义 */
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #F3F4F6;
+            --accent-color: #F97316;
+            --text-primary: #374151;
+            --text-secondary: #6B7280;
+            --white: #FFFFFF;
+            --shadow-color: #E5E7EB;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 40px;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: var(--accent-color);
+            }
+
+            .nav-link.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+        .language-switch {
+            margin-left: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            .language-switch:hover {
+                color: var(--accent-color);
+            }
+
+        /* 移动端导航 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background-color: var(--white);
+                margin: 3px 0;
+                transition: 0.4s;
+            }
+
+        /* 主内容区 */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        /* 核心引导区 */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .categories {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .category-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .category-item {
+            margin-bottom: 8px;
+        }
+
+        .category-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+            .category-link:hover {
+                color: var(--accent-color);
+                text-decoration: underline;
+            }
+
+        .user-guides {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .guide-card {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .guide-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .guide-desc {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn:hover {
+                background-color: #1a365d;
+            }
+
+        /* 公司信息区 */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 300px;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-text {
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .media-links {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 底部信息区 */
+        .footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+            .footer-contact span {
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            }
+
+                .nav-menu.active {
+                    left: 0;
+                }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .language-switch {
+                margin: 20px 0;
+            }
+
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+
+            .category-list {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img">VLITCG</div>
+                <span class="company-name" data-zh="广地国际商贸集团" data-en="VAST LAND GROUP">广地国际商贸集团</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active" data-zh="首页" data-en="Home">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link" data-zh="商品列表" data-en="Products">商品列表</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-buyers.html" class="nav-link" data-zh="买家页面" data-en="For Buyers">买家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-sellers.html" class="nav-link" data-zh="卖家页面" data-en="For Sellers">卖家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact-us.html" class="nav-link" data-zh="联系方式" data-en="Contact Us">联系方式</a>
+                </li>
+                <li class="language-switch" id="languageSwitch">EN</li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 核心引导区 -->
+            <section class="hero-section">
+                <div class="categories">
+                    <h2 class="section-title" data-zh="商品分类" data-en="Categories">商品分类</h2>
+                    <ul class="category-list">
+                        <li class="category-item">
+                            <a href="products.html#category1" class="category-link"
+                               data-zh="1. 家用及公共用发电设备"
+                               data-en="1. Household & Public Power Generation">1. 家用及公共用发电设备</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category2" class="category-link"
+                               data-zh="2. 环保建材及小型金属工具"
+                               data-en="2. Eco-friendly Building Materials & Small Metal Tools">2. 环保建材及小型金属工具</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category3" class="category-link"
+                               data-zh="3. 灯具、玻璃制品"
+                               data-en="3. Lamps & Glass Products">3. 灯具、玻璃制品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category4" class="category-link"
+                               data-zh="4. 建筑结构金属部件"
+                               data-en="4. Structural Metal Components">4. 建筑结构金属部件</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category5" class="category-link"
+                               data-zh="5. 电气及新能源汽车产品"
+                               data-en="5. Electrical & New Energy Vehicles">5. 电气及新能源汽车产品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category6" class="category-link"
+                               data-zh="6. 出口农产品"
+                               data-en="6. Export Agricultural Products">6. 出口农产品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category7" class="category-link"
+                               data-zh="7. 农业及工程、矿山机械设备"
+                               data-en="7. Agricultural, Engineering & Mining Machinery">7. 农业及工程、矿山机械设备</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category8" class="category-link"
+                               data-zh="8. 医疗设备供应"
+                               data-en="8. Medical Equipment Supply">8. 医疗设备供应</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category9" class="category-link"
+                               data-zh="9. 纺织服装（含二手服装）"
+                               data-en="9. Textiles & Apparel (Including Second-hand)">9. 纺织服装（含二手服装）</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category10" class="category-link"
+                               data-zh="10. 钢材及管材产品"
+                               data-en="10. Steel & Pipe Products">10. 钢材及管材产品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category11" class="category-link"
+                               data-zh="11. 家用电器及电子产品"
+                               data-en="11. Home Appliances & Electronics">11. 家用电器及电子产品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category12" class="category-link"
+                               data-zh="12. 石油及石油深加工产品"
+                               data-en="12. Petroleum & Petroleum Products">12. 石油及石油深加工产品</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category13" class="category-link"
+                               data-zh="13. 电脑及移动配件"
+                               data-en="13. Computer & Mobile Accessories">13. 电脑及移动配件</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category14" class="category-link"
+                               data-zh="14. 车轮轮胎、汽车零部件"
+                               data-en="14. Wheels, Tires & Auto Parts">14. 车轮轮胎、汽车零部件</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category15" class="category-link"
+                               data-zh="15. 铝合金门窗"
+                               data-en="15. Aluminum Alloy Doors & Windows">15. 铝合金门窗</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category16" class="category-link"
+                               data-zh="16. 乌干达及非洲投资咨询"
+                               data-en="16. Uganda & Africa Investment Consulting">16. 乌干达及非洲投资咨询</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category17" class="category-link"
+                               data-zh="17. 中国产品及技术研究服务"
+                               data-en="17. Chinese Products & Technology Research">17. 中国产品及技术研究服务</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category18" class="category-link"
+                               data-zh="18. 进出口贸易代理"
+                               data-en="18. Import & Export Trade Agency">18. 进出口贸易代理</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category19" class="category-link"
+                               data-zh="19. 大宗商品融资担保"
+                               data-en="19. Commodity Financing & Guarantee">19. 大宗商品融资担保</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category20" class="category-link"
+                               data-zh="20. 安防及军用设备"
+                               data-en="20. Security & Military Equipment">20. 安防及军用设备</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category21" class="category-link"
+                               data-zh="21. 各类货物采购及物流服务"
+                               data-en="21. Goods Procurement & Logistics Services">21. 各类货物采购及物流服务</a>
+                        </li>
+                        <li class="category-item">
+                            <a href="products.html#category22" class="category-link"
+                               data-zh="22. 建筑设计及工程管理"
+                               data-en="22. Architectural Design & Engineering Management">22. 建筑设计及工程管理</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="user-guides">
+                    <div class="guide-card">
+                        <h3 class="guide-title" data-zh="买家专区" data-en="For Buyers">买家专区</h3>
+                        <p class="guide-desc" data-zh="轻松采购中国优质产品，高效直达乌干达"
+                           data-en="Easily purchase high-quality Chinese products, efficiently delivered to Uganda">轻松采购中国优质产品，高效直达乌干达</p>
+                        <a href="for-buyers.html" class="btn" data-zh="了解更多" data-en="Learn More">了解更多</a>
+                    </div>
+
+                    <div class="guide-card">
+                        <h3 class="guide-title" data-zh="卖家专区" data-en="For Sellers">卖家专区</h3>
+                        <p class="guide-desc" data-zh="依托我们的渠道，扩大业务覆盖，提升盈利空间"
+                           data-en="Expand your business coverage and increase profits through our channels">依托我们的渠道，扩大业务覆盖，提升盈利空间</p>
+                        <a href="for-sellers.html" class="btn" data-zh="了解更多" data-en="Learn More">了解更多</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 公司信息区 -->
+            <section class="about-section">
+                <div class="about-image" data-zh="公司形象图片" data-en="Company Image">公司形象图片</div>
+
+                <div class="about-content">
+                    <h2 class="section-title" data-zh="关于我们" data-en="About Us">关于我们</h2>
+                    <p class="about-text" data-zh="VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP（广地国际商贸集团有限公司）致力于搭建中国与乌干达及东非地区的贸易桥梁，深耕批发分销与全球物流领域。"
+                       data-en="VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP is committed to building a trade bridge between China, Uganda and East Africa, specializing in wholesale distribution and global logistics.">
+                        VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP（广地国际商贸集团有限公司）致力于搭建中国与乌干达及东非地区的贸易桥梁，深耕批发分销与全球物流领域。
+                    </p>
+                    <p class="about-text" data-zh="我们拥有丰富的行业经验和强大的资源优势，依托中国完善的供应链体系和乌干达成熟的分销网络，为客户提供一站式的跨境贸易解决方案。"
+                       data-en="We have rich industry experience and strong resource advantages, relying on China's complete supply chain system and Uganda's mature distribution network to provide customers with one-stop cross-border trade solutions.">
+                        我们拥有丰富的行业经验和强大的资源优势，依托中国完善的供应链体系和乌干达成熟的分销网络，为客户提供一站式的跨境贸易解决方案。
+                    </p>
+                    <p class="about-text" data-zh="公司秉承诚信、高效、客户至上的核心价值观，致力于成为中乌贸易领域最值得信赖的合作伙伴。"
+                       data-en="The company adheres to the core values of integrity, efficiency and customer first, and is committed to becoming the most trusted partner in China-Uganda trade.">
+                        公司秉承诚信、高效、客户至上的核心价值观，致力于成为中乌贸易领域最值得信赖的合作伙伴。
+                    </p>
+
+                    <div class="media-links" data-zh="媒体平台：Facebook | Twitter | LinkedIn | WhatsApp"
+                         data-en="Media Platforms: Facebook | Twitter | LinkedIn | WhatsApp">
+                        媒体平台：Facebook | Twitter | LinkedIn | WhatsApp
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部信息区 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <span data-zh="公司邮箱：" data-en="Company Email: ">公司邮箱：</span>
+                    info@vastlandgroup.com
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="中国负责人：" data-en="China Contact: ">中国负责人：</span>
+                    +86 138-XXXX-XXXX
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="乌干达负责人：" data-en="Uganda Contact: ">乌干达负责人：</span>
+                    +256 7XX-XXXXXX
+                </div>
+            </div>
+            <div class="copyright" data-zh="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。"
+                 data-en="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. All rights reserved.">
+                © 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端导航切换
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 中英文切换功能
+        const languageSwitch = document.getElementById('languageSwitch');
+        let currentLanguage = 'zh'; // 默认中文
+
+        languageSwitch.addEventListener('click', () => {
+            if (currentLanguage === 'zh') {
+                // 切换到英文
+                document.documentElement.lang = 'en';
+                currentLanguage = 'en';
+                languageSwitch.textContent = '中';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-en]').forEach(element => {
+                    element.textContent = element.getAttribute('data-en');
+                });
+            } else {
+                // 切换到中文
+                document.documentElement.lang = 'zh-CN';
+                currentLanguage = 'zh';
+                languageSwitch.textContent = 'EN';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-zh]').forEach(element => {
+                    element.textContent = element.getAttribute('data-zh');
+                });
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

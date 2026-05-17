@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products / 商品列表 - VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        /* 颜色变量定义 - 与主页面完全一致 */
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #F3F4F6;
+            --accent-color: #F97316;
+            --text-primary: #374151;
+            --text-secondary: #6B7280;
+            --white: #FFFFFF;
+            --shadow-color: #E5E7EB;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 - 与主页面完全一致 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 40px;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: var(--accent-color);
+            }
+
+            .nav-link.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+        .language-switch {
+            margin-left: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            .language-switch:hover {
+                color: var(--accent-color);
+            }
+
+        /* 移动端导航 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background-color: var(--white);
+                margin: 3px 0;
+                transition: 0.4s;
+            }
+
+        /* 主内容区 */
+        .main-content {
+            margin-top: 80px;
+            margin-bottom: 50px;
+        }
+
+        /* 页面标题区 */
+        .page-title-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* 商品分类筛选区 */
+        .category-filter-section {
+            margin-bottom: 30px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 10px;
+        }
+
+        .category-filter {
+            display: inline-flex;
+            gap: 10px;
+        }
+
+        .category-btn {
+            width: 100px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+            .category-btn:hover {
+                background-color: var(--primary-color);
+                color: var(--white);
+            }
+
+            .category-btn.active {
+                background-color: var(--primary-color);
+                color: var(--white);
+            }
+
+        /* 商品展示区 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            padding: 20px;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+            .product-card:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 底部信息区 - 与主页面完全一致 */
+        .footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+            .footer-contact span {
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            }
+
+                .nav-menu.active {
+                    left: 0;
+                }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .language-switch {
+                margin: 20px 0;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 与主页面完全一致 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img">VLITCG</div>
+                <span class="company-name" data-zh="广地国际商贸集团" data-en="VAST LAND GROUP">广地国际商贸集团</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-zh="首页" data-en="Home">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link active" data-zh="商品列表" data-en="Products">商品列表</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-buyers.html" class="nav-link" data-zh="买家页面" data-en="For Buyers">买家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-sellers.html" class="nav-link" data-zh="卖家页面" data-en="For Sellers">卖家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact-us.html" class="nav-link" data-zh="联系方式" data-en="Contact Us">联系方式</a>
+                </li>
+                <li class="language-switch" id="languageSwitch">EN</li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 页面标题区 -->
+            <section class="page-title-section">
+                <h1 class="page-title" data-zh="商品列表" data-en="Products">商品列表</h1>
+                <p class="page-subtitle" data-zh="全品类商品展示，按需选择" data-en="Full range of products displayed, choose as needed">全品类商品展示，按需选择</p>
+            </section>
+
+            <!-- 商品分类筛选区 -->
+            <section class="category-filter-section">
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all" data-zh="全部商品" data-en="All Products">全部商品</button>
+                    <button class="category-btn" data-category="a" data-zh="A. 能源领域" data-en="A. Energy">A. 能源领域</button>
+                    <button class="category-btn" data-category="b" data-zh="B. 建材工具" data-en="B. Building Materials">B. 建材工具</button>
+                    <button class="category-btn" data-category="c" data-zh="C. 家居装饰" data-en="C. Home Decor">C. 家居装饰</button>
+                    <button class="category-btn" data-category="d" data-zh="D. 交通车辆" data-en="D. Vehicles">D. 交通车辆</button>
+                    <button class="category-btn" data-category="e" data-zh="E. 农业食品" data-en="E. Agriculture">E. 农业食品</button>
+                    <button class="category-btn" data-category="f" data-zh="F. 机械设备" data-en="F. Machinery">F. 机械设备</button>
+                    <button class="category-btn" data-category="g" data-zh="G. 纺织服装" data-en="G. Textiles">G. 纺织服装</button>
+                    <button class="category-btn" data-category="h" data-zh="H. 电子电器" data-en="H. Electronics">H. 电子电器</button>
+                    <button class="category-btn" data-category="i" data-zh="I. 工业原料" data-en="I. Industrial Materials">I. 工业原料</button>
+                    <button class="category-btn" data-category="j" data-zh="J. 综合服务" data-en="J. Services">J. 综合服务</button>
+                </div>
+            </section>
+
+            <!-- 商品展示区 -->
+            <section class="products-grid">
+                <!-- A类：能源领域 -->
+                <div class="product-card" data-category="a">
+                    <h3 class="product-name" data-zh="太阳能发电机" data-en="Solar Generator">太阳能发电机</h3>
+                    <p class="product-desc" data-zh="家用及公共用太阳能发电设备，多种功率可选" data-en="Household and public solar power generation equipment, various power options">家用及公共用太阳能发电设备，多种功率可选</p>
+                </div>
+                <div class="product-card" data-category="a">
+                    <h3 class="product-name" data-zh="水力发电机" data-en="Hydro Generator">水力发电机</h3>
+                    <p class="product-desc" data-zh="小型水力发电设备，适合偏远地区使用" data-en="Small hydroelectric power equipment, suitable for remote areas">小型水力发电设备，适合偏远地区使用</p>
+                </div>
+                <div class="product-card" data-category="a">
+                    <h3 class="product-name" data-zh="风力发电机" data-en="Wind Turbine">风力发电机</h3>
+                    <p class="product-desc" data-zh="中小型风力发电系统，高效节能" data-en="Small and medium wind power systems, high efficiency and energy saving">中小型风力发电系统，高效节能</p>
+                </div>
+
+                <!-- B类：建材工具 -->
+                <div class="product-card" data-category="b">
+                    <h3 class="product-name" data-zh="环保建材" data-en="Eco-friendly Building Materials">环保建材</h3>
+                    <p class="product-desc" data-zh="各类环保建筑材料，符合国际标准" data-en="Various eco-friendly building materials, meeting international standards">各类环保建筑材料，符合国际标准</p>
+                </div>
+                <div class="product-card" data-category="b">
+                    <h3 class="product-name" data-zh="小型金属工具" data-en="Small Metal Tools">小型金属工具</h3>
+                    <p class="product-desc" data-zh="各类手动工具、五金工具套装" data-en="Various hand tools and hardware tool sets">各类手动工具、五金工具套装</p>
+                </div>
+                <div class="product-card" data-category="b">
+                    <h3 class="product-name" data-zh="建筑结构金属部件" data-en="Structural Metal Components">建筑结构金属部件</h3>
+                    <p class="product-desc" data-zh="钢结构件、钢筋、预埋件等建筑用金属产品" data-en="Steel structures, steel bars, embedded parts and other metal products for construction">钢结构件、钢筋、预埋件等建筑用金属产品</p>
+                </div>
+
+                <!-- C类：家居装饰 -->
+                <div class="product-card" data-category="c">
+                    <h3 class="product-name" data-zh="各类灯具" data-en="Various Lamps">各类灯具</h3>
+                    <p class="product-desc" data-zh="LED灯、节能灯、户外照明灯具" data-en="LED lights, energy-saving lamps, outdoor lighting fixtures">LED灯、节能灯、户外照明灯具</p>
+                </div>
+                <div class="product-card" data-category="c">
+                    <h3 class="product-name" data-zh="玻璃制品" data-en="Glass Products">玻璃制品</h3>
+                    <p class="product-desc" data-zh="建筑玻璃、装饰玻璃、日用玻璃制品" data-en="Architectural glass, decorative glass, daily glass products">建筑玻璃、装饰玻璃、日用玻璃制品</p>
+                </div>
+                <div class="product-card" data-category="c">
+                    <h3 class="product-name" data-zh="铝合金门窗" data-en="Aluminum Alloy Doors & Windows">铝合金门窗</h3>
+                    <p class="product-desc" data-zh="定制铝合金门窗，坚固耐用" data-en="Custom aluminum alloy doors and windows, strong and durable">定制铝合金门窗，坚固耐用</p>
+                </div>
+
+                <!-- D类：交通车辆 -->
+                <div class="product-card" data-category="d">
+                    <h3 class="product-name" data-zh="电气产品" data-en="Electrical Products">电气产品</h3>
+                    <p class="product-desc" data-zh="电线电缆、开关插座、配电箱等电气设备" data-en="Wires, cables, switches, sockets, distribution boxes and other electrical equipment">电线电缆、开关插座、配电箱等电气设备</p>
+                </div>
+                <div class="product-card" data-category="d">
+                    <h3 class="product-name" data-zh="新能源汽车" data-en="New Energy Vehicles">新能源汽车</h3>
+                    <p class="product-desc" data-zh="两轮电动车、小型及重型电动车辆" data-en="Two-wheeled electric vehicles, small and heavy electric vehicles">两轮电动车、小型及重型电动车辆</p>
+                </div>
+                <div class="product-card" data-category="d">
+                    <h3 class="product-name" data-zh="汽车零部件" data-en="Auto Parts">汽车零部件</h3>
+                    <p class="product-desc" data-zh="车轮轮胎、发动机配件、底盘配件等" data-en="Wheels, tires, engine parts, chassis parts, etc.">车轮轮胎、发动机配件、底盘配件等</p>
+                </div>
+
+                <!-- E类：农业食品 -->
+                <div class="product-card" data-category="e">
+                    <h3 class="product-name" data-zh="出口农产品" data-en="Export Agricultural Products">出口农产品</h3>
+                    <p class="product-desc" data-zh="各类中国特色农产品，品质优良" data-en="Various Chinese characteristic agricultural products with excellent quality">各类中国特色农产品，品质优良</p>
+                </div>
+
+                <!-- F类：机械设备 -->
+                <div class="product-card" data-category="f">
+                    <h3 class="product-name" data-zh="农业机械设备" data-en="Agricultural Machinery">农业机械设备</h3>
+                    <p class="product-desc" data-zh="拖拉机、收割机、播种机等农业机械" data-en="Tractors, harvesters, seeders and other agricultural machinery">拖拉机、收割机、播种机等农业机械</p>
+                </div>
+                <div class="product-card" data-category="f">
+                    <h3 class="product-name" data-zh="工程机械设备" data-en="Engineering Machinery">工程机械设备</h3>
+                    <p class="product-desc" data-zh="挖掘机、装载机、起重机等工程设备" data-en="Excavators, loaders, cranes and other engineering equipment">挖掘机、装载机、起重机等工程设备</p>
+                </div>
+                <div class="product-card" data-category="f">
+                    <h3 class="product-name" data-zh="矿山机械设备" data-en="Mining Machinery">矿山机械设备</h3>
+                    <p class="product-desc" data-zh="破碎机、筛分设备、输送设备等矿山机械" data-en="Crushers, screening equipment, conveying equipment and other mining machinery">破碎机、筛分设备、输送设备等矿山机械</p>
+                </div>
+                <div class="product-card" data-category="f">
+                    <h3 class="product-name" data-zh="医疗设备" data-en="Medical Equipment">医疗设备</h3>
+                    <p class="product-desc" data-zh="各类医疗设备及耗材供应" data-en="Supply of various medical equipment and consumables">各类医疗设备及耗材供应</p>
+                </div>
+
+                <!-- G类：纺织服装 -->
+                <div class="product-card" data-category="g">
+                    <h3 class="product-name" data-zh="纺织服装" data-en="Textiles & Apparel">纺织服装</h3>
+                    <p class="product-desc" data-zh="各类服装、纺织品，款式多样" data-en="Various clothing and textiles with diverse styles">各类服装、纺织品，款式多样</p>
+                </div>
+                <div class="product-card" data-category="g">
+                    <h3 class="product-name" data-zh="二手服装" data-en="Second-hand Clothing">二手服装</h3>
+                    <p class="product-desc" data-zh="优质二手服装，价格实惠" data-en="High-quality second-hand clothing at affordable prices">优质二手服装，价格实惠</p>
+                </div>
+
+                <!-- H类：电子电器 -->
+                <div class="product-card" data-category="h">
+                    <h3 class="product-name" data-zh="家用电器" data-en="Home Appliances">家用电器</h3>
+                    <p class="product-desc" data-zh="冰箱、洗衣机、空调等各类家电" data-en="Refrigerators, washing machines, air conditioners and other home appliances">冰箱、洗衣机、空调等各类家电</p>
+                </div>
+                <div class="product-card" data-category="h">
+                    <h3 class="product-name" data-zh="电子产品" data-en="Electronic Products">电子产品</h3>
+                    <p class="product-desc" data-zh="手机、平板、音响等消费电子产品" data-en="Mobile phones, tablets, speakers and other consumer electronics">手机、平板、音响等消费电子产品</p>
+                </div>
+                <div class="product-card" data-category="h">
+                    <h3 class="product-name" data-zh="电脑及移动配件" data-en="Computer & Mobile Accessories">电脑及移动配件</h3>
+                    <p class="product-desc" data-zh="电脑配件、手机配件、数码配件" data-en="Computer accessories, mobile phone accessories, digital accessories">电脑配件、手机配件、数码配件</p>
+                </div>
+
+                <!-- I类：工业原料 -->
+                <div class="product-card" data-category="i">
+                    <h3 class="product-name" data-zh="钢材及管材" data-en="Steel & Pipe Products">钢材及管材</h3>
+                    <p class="product-desc" data-zh="各类钢材、管材、型材产品" data-en="Various steel, pipe and profile products">各类钢材、管材、型材产品</p>
+                </div>
+                <div class="product-card" data-category="i">
+                    <h3 class="product-name" data-zh="石油及石油产品" data-en="Petroleum & Petroleum Products">石油及石油产品</h3>
+                    <p class="product-desc" data-zh="各类石油及石油深加工产品" data-en="Various petroleum and petroleum deep-processing products">各类石油及石油深加工产品</p>
+                </div>
+
+                <!-- J类：综合服务 -->
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="乌干达及非洲投资咨询" data-en="Uganda & Africa Investment Consulting">乌干达及非洲投资咨询</h3>
+                    <p class="product-desc" data-zh="专业的非洲投资咨询服务" data-en="Professional African investment consulting services">专业的非洲投资咨询服务</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="中国产品及技术研究" data-en="Chinese Products & Technology Research">中国产品及技术研究</h3>
+                    <p class="product-desc" data-zh="中国产品市场调研及技术分析服务" data-en="Chinese product market research and technical analysis services">中国产品市场调研及技术分析服务</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="进出口贸易代理" data-en="Import & Export Trade Agency">进出口贸易代理</h3>
+                    <p class="product-desc" data-zh="一站式进出口贸易代理服务" data-en="One-stop import and export trade agency services">一站式进出口贸易代理服务</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="大宗商品融资担保" data-en="Commodity Financing & Guarantee">大宗商品融资担保</h3>
+                    <p class="product-desc" data-zh="大宗商品贸易融资及担保服务" data-en="Commodity trade financing and guarantee services">大宗商品贸易融资及担保服务</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="安防及军用设备" data-en="Security & Military Equipment">安防及军用设备</h3>
+                    <p class="product-desc" data-zh="各类安防设备及军用物资供应" data-en="Supply of various security equipment and military supplies">各类安防设备及军用物资供应</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="货物采购及物流服务" data-en="Goods Procurement & Logistics Services">货物采购及物流服务</h3>
+                    <p class="product-desc" data-zh="全球货物采购及一站式物流解决方案" data-en="Global goods procurement and one-stop logistics solutions">全球货物采购及一站式物流解决方案</p>
+                </div>
+                <div class="product-card" data-category="j">
+                    <h3 class="product-name" data-zh="建筑设计及工程管理" data-en="Architectural Design & Engineering Management">建筑设计及工程管理</h3>
+                    <p class="product-desc" data-zh="专业建筑设计及工程项目管理服务" data-en="Professional architectural design and engineering project management services">专业建筑设计及工程项目管理服务</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部信息区 - 与主页面完全一致 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <span data-zh="公司邮箱：" data-en="Company Email: ">公司邮箱：</span>
+                    info@vastlandgroup.com
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="中国负责人：" data-en="China Contact: ">中国负责人：</span>
+                    +86 138-XXXX-XXXX
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="乌干达负责人：" data-en="Uganda Contact: ">乌干达负责人：</span>
+                    +256 7XX-XXXXXX
+                </div>
+            </div>
+            <div class="copyright" data-zh="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。"
+                 data-en="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. All rights reserved.">
+                © 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端导航切换 - 与主页面完全一致
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 中英文切换功能 - 与主页面完全一致
+        const languageSwitch = document.getElementById('languageSwitch');
+        let currentLanguage = 'zh'; // 默认中文
+
+        languageSwitch.addEventListener('click', () => {
+            if (currentLanguage === 'zh') {
+                // 切换到英文
+                document.documentElement.lang = 'en';
+                currentLanguage = 'en';
+                languageSwitch.textContent = '中';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-en]').forEach(element => {
+                    element.textContent = element.getAttribute('data-en');
+                });
+            } else {
+                // 切换到中文
+                document.documentElement.lang = 'zh-CN';
+                currentLanguage = 'zh';
+                languageSwitch.textContent = 'EN';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-zh]').forEach(element => {
+                    element.textContent = element.getAttribute('data-zh');
+                });
+            }
+        });
+
+        // 商品分类筛选功能
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有按钮的active类
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // 给当前点击的按钮添加active类
+                btn.classList.add('active');
+
+                const category = btn.getAttribute('data-category');
+
+                // 筛选产品卡片
+                productCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

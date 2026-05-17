@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Sellers / 卖家指南 - VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+
+        /* 颜色变量定义 - 与所有页面完全一致 */
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #F3F4F6;
+            --accent-color: #F97316;
+            --accent-light: #FFF7ED;
+            --text-primary: #374151;
+            --text-secondary: #6B7280;
+            --white: #FFFFFF;
+            --shadow-color: #E5E7EB;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 - 与所有页面完全一致 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 40px;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: var(--accent-color);
+            }
+
+            .nav-link.active {
+                font-weight: bold;
+                text-decoration: underline;
+            }
+
+        .language-switch {
+            margin-left: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+            .language-switch:hover {
+                color: var(--accent-color);
+            }
+
+        /* 移动端导航 */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background-color: var(--white);
+                margin: 3px 0;
+                transition: 0.4s;
+            }
+
+        /* 主内容区 */
+        .main-content {
+            margin-top: 80px;
+            margin-bottom: 50px;
+        }
+
+        /* 页面标题区 - 与其他页面完全一致 */
+        .page-title-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* 核心内容区 - 与买家页面布局完全一致 */
+        .core-content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .content-card {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--shadow-color);
+        }
+
+        .content-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-item {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+            .content-item:last-child {
+                margin-bottom: 0;
+            }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* 联系方式提示区 - 与买家页面样式一致，内容不同 */
+        .contact-prompt-section {
+            background-color: var(--accent-light);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .prompt-text {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .prompt-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .prompt-contact {
+            font-size: 16px;
+        }
+
+            .prompt-contact span {
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+        /* 底部信息区 - 与所有页面完全一致 */
+        .footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+            .footer-contact span {
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            }
+
+                .nav-menu.active {
+                    left: 0;
+                }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .language-switch {
+                margin: 20px 0;
+            }
+
+            .core-content-section {
+                grid-template-columns: 1fr;
+            }
+
+            .prompt-contacts {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 与所有页面完全一致 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <div class="logo-img">VLITCG</div>
+                <span class="company-name" data-zh="广地国际商贸集团" data-en="VAST LAND GROUP">广地国际商贸集团</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-zh="首页" data-en="Home">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link" data-zh="商品列表" data-en="Products">商品列表</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-buyers.html" class="nav-link" data-zh="买家页面" data-en="For Buyers">买家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="for-sellers.html" class="nav-link active" data-zh="卖家页面" data-en="For Sellers">卖家页面</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact-us.html" class="nav-link" data-zh="联系方式" data-en="Contact Us">联系方式</a>
+                </li>
+                <li class="language-switch" id="languageSwitch">EN</li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 页面标题区 -->
+            <section class="page-title-section">
+                <h1 class="page-title" data-zh="卖家指南" data-en="For Sellers">卖家指南</h1>
+                <p class="page-subtitle" data-zh="依托我们的渠道，扩大业务覆盖，提升盈利空间"
+                   data-en="Expand your business coverage and increase profits through our channels">
+                    依托我们的渠道，扩大业务覆盖，提升盈利空间
+                </p>
+            </section>
+
+            <!-- 核心内容区 -->
+            <section class="core-content-section">
+                <div class="content-card">
+                    <h2 class="content-title" data-zh="合作优势" data-en="Cooperation Advantages">合作优势</h2>
+                    <ul class="content-list">
+                        <li class="content-item" data-zh="公司负责<span class='highlight'>运输、分销及市场对接</span>，卖家无需承担物流及市场推广压力"
+                            data-en="The company is responsible for <span class='highlight'>transportation, distribution and market docking</span>, sellers do not need to bear logistics and marketing pressure">
+                            公司负责<span class="highlight">运输、分销及市场对接</span>，卖家无需承担物流及市场推广压力
+                        </li>
+                        <li class="content-item" data-zh="依托公司在乌干达的<span class='highlight'>成熟分销渠道</span>，助力卖家快速扩大业务覆盖范围"
+                            data-en="Rely on the company's <span class='highlight'>mature distribution channels</span> in Uganda to help sellers quickly expand their business coverage">
+                            依托公司在乌干达的<span class="highlight">成熟分销渠道</span>，助力卖家快速扩大业务覆盖范围
+                        </li>
+                        <li class="content-item" data-zh="有效<span class='highlight'>提升盈利空间</span>，减少中间环节，直接对接终端市场"
+                            data-en="Effectively <span class='highlight'>increase profit margins</span>, reduce intermediate links, and directly connect to the terminal market">
+                            有效<span class="highlight">提升盈利空间</span>，减少中间环节，直接对接终端市场
+                        </li>
+                        <li class="content-item" data-zh="提供<span class='highlight'>专业的对接服务</span>，简化合作流程，降低合作成本"
+                            data-en="Provide <span class='highlight'>professional docking services</span>, simplify the cooperation process and reduce cooperation costs">
+                            提供<span class="highlight">专业的对接服务</span>，简化合作流程，降低合作成本
+                        </li>
+                        <li class="content-item" data-zh="覆盖<span class='highlight'>东非多个国家市场</span>，为卖家提供更广阔的发展空间"
+                            data-en="Cover <span class='highlight'>multiple national markets in East Africa</span>, providing sellers with broader development space">
+                            覆盖<span class="highlight">东非多个国家市场</span>，为卖家提供更广阔的发展空间
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-card">
+                    <h2 class="content-title" data-zh="合作方式" data-en="Cooperation Process">合作方式</h2>
+                    <ol class="content-list">
+                        <li class="content-item" data-zh="通过页面展示的<span class='highlight'>联系方式</span>联系公司，说明自身产品及合作意愿"
+                            data-en="Contact the company through the <span class='highlight'>contact information</span> displayed on the page and explain your products and cooperation intentions">
+                            通过页面展示的<span class="highlight">联系方式</span>联系公司，说明自身产品及合作意愿
+                        </li>
+                        <li class="content-item" data-zh="与公司对接人员沟通<span class='highlight'>产品细节、合作条款、供货方式</span>等具体事宜"
+                            data-en="Communicate with the company's contact person about <span class='highlight'>product details, cooperation terms, supply methods</span> and other specific matters">
+                            与公司对接人员沟通<span class="highlight">产品细节、合作条款、供货方式</span>等具体事宜
+                        </li>
+                        <li class="content-item" data-zh="确认合作意向后，<span class='highlight'>签订合作协议（线下）</span>"
+                            data-en="After confirming the cooperation intention, <span class='highlight'>sign a cooperation agreement (offline)</span>">
+                            确认合作意向后，<span class="highlight">签订合作协议（线下）</span>
+                        </li>
+                        <li class="content-item" data-zh="卖家按协议提供产品，公司负责后续<span class='highlight'>运输、分销及市场推广</span>"
+                            data-en="Sellers provide products according to the agreement, and the company is responsible for subsequent <span class='highlight'>transportation, distribution and marketing</span>">
+                            卖家按协议提供产品，公司负责后续<span class="highlight">运输、分销及市场推广</span>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 联系方式提示区 - 卖家专属，同时显示中乌两地负责人 -->
+            <section class="contact-prompt-section">
+                <p class="prompt-text" data-zh="如有合作意向，可随时联系我们"
+                   data-en="If you have any cooperation intentions, please feel free to contact us">
+                    如有合作意向，可随时联系我们
+                </p>
+                <div class="prompt-contacts">
+                    <div class="prompt-contact">
+                        <span data-zh="公司邮箱：" data-en="Company Email: ">公司邮箱：</span>
+                        info@vastlandgroup.com
+                    </div>
+                    <div class="prompt-contact">
+                        <span data-zh="中国负责人：" data-en="China Contact: ">中国负责人：</span>
+                        +86 138-XXXX-XXXX
+                    </div>
+                    <div class="prompt-contact">
+                        <span data-zh="乌干达负责人：" data-en="Uganda Contact: ">乌干达负责人：</span>
+                        +256 7XX-XXXXXX
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部信息区 - 与所有页面完全一致 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-contact">
+                    <span data-zh="公司邮箱：" data-en="Company Email: ">公司邮箱：</span>
+                    info@vastlandgroup.com
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="中国负责人：" data-en="China Contact: ">中国负责人：</span>
+                    +86 138-XXXX-XXXX
+                </div>
+                <div class="footer-contact">
+                    <span data-zh="乌干达负责人：" data-en="Uganda Contact: ">乌干达负责人：</span>
+                    +256 7XX-XXXXXX
+                </div>
+            </div>
+            <div class="copyright" data-zh="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。"
+                 data-en="© 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. All rights reserved.">
+                © 2026 VAST LAND INTERNATIONAL TRADE AND COMMERCE GROUP. 保留所有权利。
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端导航切换 - 与所有页面完全一致
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // 中英文切换功能 - 与所有页面完全一致
+        const languageSwitch = document.getElementById('languageSwitch');
+        let currentLanguage = 'zh'; // 默认中文
+
+        languageSwitch.addEventListener('click', () => {
+            if (currentLanguage === 'zh') {
+                // 切换到英文
+                document.documentElement.lang = 'en';
+                currentLanguage = 'en';
+                languageSwitch.textContent = '中';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-en]').forEach(element => {
+                    element.textContent = element.getAttribute('data-en');
+                });
+            } else {
+                // 切换到中文
+                document.documentElement.lang = 'zh-CN';
+                currentLanguage = 'zh';
+                languageSwitch.textContent = 'EN';
+
+                // 更新所有元素的文本内容
+                document.querySelectorAll('[data-zh]').forEach(element => {
+                    element.textContent = element.getAttribute('data-zh');
+                });
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
